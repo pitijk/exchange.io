@@ -5,7 +5,7 @@ import { deleteCurrency, editCurrency } from "../actions";
 import { calcValues } from "../helpers";
 
 const Currency = props => {
-  const { shortcut, amount, currentValue, isEditing } = props;
+  const { shortcut, amount, currentValue, previousValue, isEditing } = props;
   const [valueInput, setValueInput] = useState(amount);
 
   const onValueInputChange = event => {
@@ -28,6 +28,15 @@ const Currency = props => {
         currentValue,
         previousValue
       );
+    }
+  };
+
+  const renderPercent = () => {
+    const percent = (currentValue / previousValue - 1) * 100;
+    if (percent > 0) {
+      return <p className="text-success">{`(+${percent.toFixed(2)}%)`}</p>;
+    } else {
+      return <p className="text-danger">{`(${percent.toFixed(2)}%)`}</p>;
     }
   };
 
@@ -64,9 +73,10 @@ const Currency = props => {
       <div className="row">
         <h4 className="col-md-3">{shortcut}</h4>
         <h4 className="col-md-3">{amount + signs[shortcut]}</h4>
-        <h4 className="col-md-3">
-          {currentValue.toFixed(2) + signs[props.defaultCurrency]}
-        </h4>
+        <div className="col-md-3">
+          <h4>{currentValue.toFixed(2) + signs[props.defaultCurrency]}</h4>
+          {renderPercent()}
+        </div>
       </div>
     );
   }

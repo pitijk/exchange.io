@@ -26,10 +26,11 @@ export const fetchExchangeRates = currency => async dispatch => {
   }
 };
 
-const addTotalValue = value => {
+const addTotalValue = (currentValue, previousValue) => {
   return {
     type: types.ADD_TOTAL_VALUE,
-    value
+    currentValue,
+    previousValue
   };
 };
 
@@ -37,7 +38,7 @@ export const addCurrency = (shortcut, amount, currentValue, previousValue) => (
   dispatch,
   getState
 ) => {
-  dispatch(addTotalValue(currentValue));
+  dispatch(addTotalValue(currentValue, previousValue));
   dispatch({
     type: types.ADD_CURRENCY,
     overload: {
@@ -49,14 +50,22 @@ export const addCurrency = (shortcut, amount, currentValue, previousValue) => (
   });
 };
 
-export const editCurrency = (shortcut, amount, currentValue, previousValue) => (
-  dispatch,
-  getState
-) => {
-  // pastValue is currentValue before editing
-  const pastValue = getState().wallet.find(cur => cur.shortcut === shortcut)
-    .currentValue;
-  dispatch(addTotalValue(currentValue - pastValue));
+export const editCurrency = (
+  shortcut,
+  amount,
+  nextCurrentValue,
+  nextPreviousValue
+) => (dispatch, getState) => {
+  // past is before editing
+  const { currentValue, previousValue } = getState().wallet.find(
+    cur => cur.shortcut === shortcut
+  );
+  dispatch(
+    addTotalValue(
+      nextCurrentValue - currentValue,
+      nextPreviousValue - previousValue
+    )
+  );
   dispatch({
     type: types.EDIT_CURRENCY,
     overload: {
@@ -69,9 +78,10 @@ export const editCurrency = (shortcut, amount, currentValue, previousValue) => (
 };
 
 export const deleteCurrency = shortcut => (dispatch, getState) => {
-  const currentValue = getState().wallet.find(cur => cur.shortcut === shortcut)
-    .currentValue;
-  dispatch(addTotalValue(-currentValue));
+  const { currentValue, previousValue } = getState().wallet.find(
+    cur => cur.shortcut === shortcut
+  );
+  dispatch(addTotalValue(-currentValue, -previousValue));
   dispatch({
     type: types.DELETE_CURRENCY,
     shortcut
