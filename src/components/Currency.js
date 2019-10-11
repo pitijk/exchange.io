@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { signs, regex } from "../statics";
 import { connect } from "react-redux";
 import { deleteCurrency, editCurrency } from "../actions";
+import { calcValues } from "../helpers";
 
 const Currency = props => {
-  const { shortcut, amount, value, isEditing } = props;
+  const { shortcut, amount, currentValue, isEditing } = props;
   const [valueInput, setValueInput] = useState(amount);
 
   const onValueInputChange = event => {
@@ -16,8 +17,17 @@ const Currency = props => {
 
   const handleSubmit = () => {
     if (regex.test(valueInput)) {
-      // editCurrency = (shortcut, amount)
-      props.editCurrency(shortcut, Number(valueInput));
+      const { currentValue, previousValue } = calcValues(
+        Number(valueInput),
+        shortcut,
+        props.exchangeRates
+      );
+      props.editCurrency(
+        shortcut,
+        Number(valueInput),
+        currentValue,
+        previousValue
+      );
     }
   };
 
@@ -36,7 +46,7 @@ const Currency = props => {
           />
         </div>
         <h4 className="col-md-3">
-          {value.toFixed(2) + signs[props.defaultCurrency]}
+          {currentValue.toFixed(2) + signs[props.defaultCurrency]}
         </h4>
         <div className="col-md-3">
           <button
@@ -55,7 +65,7 @@ const Currency = props => {
         <h4 className="col-md-3">{shortcut}</h4>
         <h4 className="col-md-3">{amount + signs[shortcut]}</h4>
         <h4 className="col-md-3">
-          {value.toFixed(2) + signs[props.defaultCurrency]}
+          {currentValue.toFixed(2) + signs[props.defaultCurrency]}
         </h4>
       </div>
     );
@@ -63,7 +73,10 @@ const Currency = props => {
 };
 
 const mapStateToProps = state => {
-  return { defaultCurrency: state.defaultCurrency };
+  return {
+    defaultCurrency: state.defaultCurrency,
+    exchangeRates: state.exchangeRates
+  };
 };
 
 export default connect(

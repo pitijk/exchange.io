@@ -26,17 +26,20 @@ const Wallet = props => {
   };
 
   const renderCurrencies = () => {
-    return props.wallet.map(({ shortcut, amount, value }) => {
-      return (
-        <Currency
-          key={shortcut}
-          shortcut={shortcut}
-          amount={amount}
-          value={value}
-          isEditing={isEditing}
-        />
-      );
-    });
+    return props.wallet.map(
+      ({ shortcut, amount, currentValue, previousValue }) => {
+        return (
+          <Currency
+            key={shortcut}
+            shortcut={shortcut}
+            amount={amount}
+            currentValue={currentValue}
+            previousValue={previousValue}
+            isEditing={isEditing}
+          />
+        );
+      }
+    );
   };
 
   return (

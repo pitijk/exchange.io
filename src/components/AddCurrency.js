@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addCurrency } from "../actions";
 import { regex } from "../statics";
+import { calcValues } from "../helpers";
 
 const AddCurrency = props => {
   const [valueInput, setValueInput] = useState("");
@@ -22,8 +23,14 @@ const AddCurrency = props => {
   const handleSubmit = event => {
     event.preventDefault();
     if (regex.test(valueInput)) {
-      // addCurrency = (shortcut, amount)
-      props.addCurrency(currencyInput, Number(valueInput));
+      const amount = Number(valueInput);
+      const { currentValue, previousValue } = calcValues(
+        amount,
+        currencyInput,
+        props.exchangeRates
+      );
+      // addCurrency = (shortcut, amount,currentValue, previousValue)
+      props.addCurrency(currencyInput, amount, currentValue, previousValue);
       setValueInput("");
     }
   };
@@ -64,7 +71,11 @@ const AddCurrency = props => {
   );
 };
 
+const mapStateToProps = state => {
+  return { exchangeRates: state.exchangeRates };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { addCurrency }
 )(AddCurrency);
