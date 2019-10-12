@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { addCurrency } from "../actions";
+import { regex } from "../statics";
+
 const AddCurrency = props => {
   const [valueInput, setValueInput] = useState("");
   const [currencyInput, setCurrencyInput] = useState("USD");
-  const regex = /^[1-9][0-9]{0,11}\.?[0-9]{0,2}$/;
 
   const onTextInputChange = event => {
     const str = event.target.value;
-    var result = regex.test(str);
+    // var result = regex.test(str);
     // result ? backToNormal : warning
     setValueInput(str);
   };

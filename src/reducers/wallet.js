@@ -14,6 +14,12 @@ export default (state = [], action) => {
       }
       newState.sort((a, b) => a.value - b.value);
       return newState;
+    case types.DELETE_CURRENCY:
+      return state.filter(cur => cur.shortcut !== action.shortcut);
+    case types.EDIT_CURRENCY:
+      return state.map(cur =>
+        cur.shortcut === action.overload.shortcut ? action.overload : cur
+      );
     case types.ASCENDING_CURRENCY_ORDER:
       return state.sort((a, b) => a.value - b.value);
     case types.DESCENDING_CURRENCY_ORDER:

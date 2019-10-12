@@ -26,6 +26,30 @@ export const addCurrency = (shortcut, amount) => (dispatch, getState) => {
   });
 };
 
+export const editCurrency = (shortcut, amount) => (dispatch, getState) => {
+  let value = amount / getState().exchangeRates[shortcut];
+  const prevValue = getState().wallet.find(cur => cur.shortcut === shortcut)
+    .value;
+  dispatch(addTotalValue(value - prevValue));
+  dispatch({
+    type: types.EDIT_CURRENCY,
+    overload: {
+      shortcut,
+      amount,
+      value
+    }
+  });
+};
+
+export const deleteCurrency = shortcut => (dispatch, getState) => {
+  const value = getState().wallet.find(cur => cur.shortcut === shortcut).value;
+  dispatch(addTotalValue(-value));
+  dispatch({
+    type: types.DELETE_CURRENCY,
+    shortcut
+  });
+};
+
 export const ascendingCurrencyOrder = () => {
   return {
     type: types.ASCENDING_CURRENCY_ORDER
