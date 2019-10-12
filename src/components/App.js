@@ -10,7 +10,9 @@ const App = props => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <Wallet />
+        <div className="col-md-8">
+          <Wallet />
+        </div>
         <div className="col-md-4">
           <AddCurrency />
         </div>
