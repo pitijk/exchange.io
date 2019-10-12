@@ -23,7 +23,6 @@ const AddCurrency = props => {
     if (regex.test(valueInput)) {
       // addCurrency = (shortcut, amount)
       props.addCurrency(currencyInput, Number(valueInput));
-      setCurrencyInput("USD");
       setValueInput("");
     }
   };

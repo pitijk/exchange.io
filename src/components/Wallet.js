@@ -4,12 +4,14 @@ import { signs } from "../statics";
 
 const Wallet = props => {
   const renderCurrencies = () => {
-    return props.wallet.map(({ shortcut, amount }) => {
+    return props.wallet.map(({ shortcut, amount, value }) => {
       return (
         <div key={shortcut} className="row">
           <h4 className="col-md-4">{shortcut}</h4>
           <h4 className="col-md-4">{amount + signs[shortcut]}</h4>
-          <h4 className="col-md-4">work in progress..</h4>
+          <h4 className="col-md-4">
+            {value.toFixed(2) + signs[props.defaultCurrency]}
+          </h4>
         </div>
       );
     });
@@ -28,7 +30,7 @@ const Wallet = props => {
 };
 
 const mapStateToProps = state => {
-  return { wallet: state.wallet };
+  return { wallet: state.wallet, defaultCurrency: state.defaultCurrency };
 };
 
 export default connect(mapStateToProps)(Wallet);

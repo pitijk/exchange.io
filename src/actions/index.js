@@ -6,14 +6,24 @@ export const fetchExchangeRates = currency => async dispatch => {
   dispatch({ type: types.FETCH_EXCHANGE_RATES, rates: response.data.rates });
 };
 
-export const addCurrency = (shortcut, amount) => {
+const addTotalValue = value => {
   return {
+    type: types.ADD_TOTAL_VALUE,
+    value
+  };
+};
+
+export const addCurrency = (shortcut, amount) => (dispatch, getState) => {
+  let value = amount / getState().exchangeRates[shortcut];
+  dispatch(addTotalValue(value));
+  dispatch({
     type: types.ADD_CURRENCY,
     overload: {
       shortcut,
-      amount
+      amount,
+      value
     }
-  };
+  });
 };
 
 export const changeDefaultCurrency = currency => {
