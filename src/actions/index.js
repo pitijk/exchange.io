@@ -26,6 +26,17 @@ export const addCurrency = (shortcut, amount) => (dispatch, getState) => {
   });
 };
 
+export const ascendingCurrencyOrder = () => {
+  return {
+    type: types.ASCENDING_CURRENCY_ORDER
+  };
+};
+export const descendingCurrencyOrder = () => {
+  return {
+    type: types.DESCENDING_CURRENCY_ORDER
+  };
+};
+
 export const changeDefaultCurrency = currency => {
   return {
     type: types.CHANGE_DEFAULT_CURRENCY,

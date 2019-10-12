@@ -9,11 +9,15 @@ export default (state = [], action) => {
       if (currency) {
         currency.amount += amount;
         currency.value += value;
-        return newState;
       } else {
-        return [...state, action.overload];
+        newState.push(action.overload);
       }
-
+      newState.sort((a, b) => a.value - b.value);
+      return newState;
+    case types.ASCENDING_CURRENCY_ORDER:
+      return state.sort((a, b) => a.value - b.value);
+    case types.DESCENDING_CURRENCY_ORDER:
+      return state.sort((a, b) => b.value - a.value);
     default:
       return state;
   }
