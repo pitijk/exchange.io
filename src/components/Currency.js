@@ -23,7 +23,7 @@ const Currency = props => {
   };
 
   const handleSubmit = () => {
-    if (regex.test(valueInput)) {
+    if (regex.test(valueInput) && Number(valueInput) !== amount) {
       const { currentValue, previousValue } = calcValues(
         Number(valueInput),
         shortcut,

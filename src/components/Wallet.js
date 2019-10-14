@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { ascendingCurrencyOrder, descendingCurrencyOrder } from "../actions";
-import Currency from "./Currency";
+import CurrenciesList from "./CurrenciesList";
 
 const Wallet = props => {
   const [ascending, setAscending] = useState(true);
@@ -10,38 +10,20 @@ const Wallet = props => {
 
   const renderSortingButton = () => {
     if (ascending) {
-      props.ascendingCurrencyOrder();
+      // props.ascendingCurrencyOrder();
       const onClick = () => {
         props.descendingCurrencyOrder();
         setAscending(false);
       };
       return <i onClick={onClick} className="fas fa-caret-up ml-1 mt-1"></i>;
     } else {
-      props.descendingCurrencyOrder();
+      // props.descendingCurrencyOrder();
       const onClick = () => {
         props.ascendingCurrencyOrder();
         setAscending(true);
       };
       return <i onClick={onClick} className="fas fa-caret-down ml-1 mt-1"></i>;
     }
-  };
-
-  const renderCurrencies = () => {
-    return props.wallet.map(
-      ({ shortcut, amount, currentValue, previousValue }) => {
-        return (
-          <Currency
-            key={shortcut}
-            firstTime={firstTime}
-            shortcut={shortcut}
-            amount={amount}
-            currentValue={currentValue}
-            previousValue={previousValue}
-            isEditing={isEditing}
-          />
-        );
-      }
-    );
   };
 
   const onButtonClick = () => {
@@ -70,16 +52,12 @@ const Wallet = props => {
           {renderSortingButton()}
         </div>
       </div>
-      {renderCurrencies()}
+      <CurrenciesList isEditing={isEditing} firstTime={firstTime} />
     </div>
   );
 };
 
-const mapStateToProps = state => {
-  return { wallet: state.wallet };
-};
-
 export default connect(
-  mapStateToProps,
+  null,
   { ascendingCurrencyOrder, descendingCurrencyOrder }
 )(Wallet);

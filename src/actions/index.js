@@ -28,20 +28,18 @@ export const fetchExchangeRates = currency => async dispatch => {
   }
 };
 
-const addTotalValue = (currentValue, previousValue) => {
+export const editTotalValue = (current, previous) => {
   return {
-    type: types.ADD_TOTAL_VALUE,
-    currentValue,
-    previousValue
+    type: types.EDIT_TOTAL_VALUE,
+    overload: {
+      current,
+      previous
+    }
   };
 };
 
-export const addCurrency = (shortcut, amount, currentValue, previousValue) => (
-  dispatch,
-  getState
-) => {
-  dispatch(addTotalValue(currentValue, previousValue));
-  dispatch({
+export const addCurrency = (shortcut, amount, currentValue, previousValue) => {
+  return {
     type: types.ADD_CURRENCY,
     overload: {
       shortcut,
@@ -49,45 +47,26 @@ export const addCurrency = (shortcut, amount, currentValue, previousValue) => (
       currentValue,
       previousValue
     }
-  });
+  };
 };
 
-export const editCurrency = (
-  shortcut,
-  amount,
-  nextCurrentValue,
-  nextPreviousValue
-) => (dispatch, getState) => {
-  // past is before editing
-  const { currentValue, previousValue } = getState().wallet.find(
-    cur => cur.shortcut === shortcut
-  );
-  dispatch(
-    addTotalValue(
-      nextCurrentValue - currentValue,
-      nextPreviousValue - previousValue
-    )
-  );
-  dispatch({
+export const editCurrency = (shortcut, amount, currentValue, previousValue) => {
+  return {
     type: types.EDIT_CURRENCY,
     overload: {
       shortcut,
       amount,
-      currentValue: nextCurrentValue,
-      previousValue: nextPreviousValue
+      currentValue,
+      previousValue
     }
-  });
+  };
 };
 
-export const deleteCurrency = shortcut => (dispatch, getState) => {
-  const { currentValue, previousValue } = getState().wallet.find(
-    cur => cur.shortcut === shortcut
-  );
-  dispatch(addTotalValue(-currentValue, -previousValue));
-  dispatch({
+export const deleteCurrency = shortcut => {
+  return {
     type: types.DELETE_CURRENCY,
     shortcut
-  });
+  };
 };
 
 export const ascendingCurrencyOrder = () => {

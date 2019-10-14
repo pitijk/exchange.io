@@ -13,7 +13,6 @@ export default (state = [], action) => {
       } else {
         newState.push(action.overload);
       }
-      newState.sort((a, b) => a.currentValue - b.currentValue);
       return newState;
     case types.DELETE_CURRENCY:
       return state.filter(cur => cur.shortcut !== action.shortcut);
@@ -23,7 +22,6 @@ export default (state = [], action) => {
       );
     case types.EDIT_CURRENCIES_VALUES:
       const { currentRates, previousRates } = action.overload;
-
       return state.map(cur => {
         return {
           ...cur,
@@ -32,9 +30,13 @@ export default (state = [], action) => {
         };
       });
     case types.ASCENDING_CURRENCY_ORDER:
-      return state.sort((a, b) => a.currentValue - b.currentValue);
+      const newState1 = [...state];
+      newState1.sort((a, b) => a.currentValue - b.currentValue);
+      return newState1;
     case types.DESCENDING_CURRENCY_ORDER:
-      return state.sort((a, b) => b.currentValue - a.currentValue);
+      const newState2 = [...state];
+      newState2.sort((a, b) => b.currentValue - a.currentValue);
+      return newState2;
     default:
       return state;
   }
