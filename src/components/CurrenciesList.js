@@ -4,15 +4,15 @@ import { editTotalValue } from "../actions";
 import Currency from "./Currency";
 
 const CurrenciesList = props => {
-  // let previousTotalValue = 0;
-  // let currentTotalValue = 0;
-  // useEffect(() => {
-  //   props.editTotalValue(currentTotalValue, previousTotalValue);
-  // });
+  let previousTotalValue = 0;
+  let currentTotalValue = 0;
+  useEffect(() => {
+    props.editTotalValue(currentTotalValue, previousTotalValue);
+  });
   const { firstTime, isEditing, wallet } = props;
   return wallet.map(({ shortcut, amount, currentValue, previousValue }) => {
-    // previousTotalValue += previousValue;
-    // currentTotalValue += currentValue;
+    previousTotalValue += previousValue;
+    currentTotalValue += currentValue;
     return (
       <Currency
         key={shortcut}
