@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { addCurrency } from "../actions";
 import { regex } from "../statics";
 import { calcValues } from "../helpers";
+import SelectOptions from "./SelectOptions";
 
 const AddCurrency = props => {
   const [valueInput, setValueInput] = useState("");
@@ -43,15 +44,7 @@ const AddCurrency = props => {
         className="form-control"
         id="currency"
       >
-        <option value="USD">USD</option>
-        <option value="CAD">CAD</option>
-        <option value="AUD">AUD</option>
-        <option value="EUR">EUR</option>
-        <option value="GBP">GBP</option>
-        <option value="CHF">CHF</option>
-        <option value="CNY">CNY</option>
-        <option value="JPY">JPY</option>
-        <option value="KRW">KRW</option>
+        <SelectOptions />
       </select>
       <label htmlFor="value" className="sr-only">
         Value
@@ -72,7 +65,10 @@ const AddCurrency = props => {
 };
 
 const mapStateToProps = state => {
-  return { exchangeRates: state.exchangeRates };
+  return {
+    exchangeRates: state.exchangeRates,
+    defaultCurrency: state.defaultCurrency
+  };
 };
 
 export default connect(

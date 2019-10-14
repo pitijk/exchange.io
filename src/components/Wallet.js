@@ -6,6 +6,7 @@ import Currency from "./Currency";
 const Wallet = props => {
   const [ascending, setAscending] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const [firstTime, setFirstTime] = useState(true);
 
   const renderSortingButton = () => {
     if (ascending) {
@@ -31,6 +32,7 @@ const Wallet = props => {
         return (
           <Currency
             key={shortcut}
+            firstTime={firstTime}
             shortcut={shortcut}
             amount={amount}
             currentValue={currentValue}
@@ -42,15 +44,20 @@ const Wallet = props => {
     );
   };
 
+  const onButtonClick = () => {
+    if (isEditing) {
+      setIsEditing(false);
+    } else {
+      setFirstTime(false);
+      setIsEditing(true);
+    }
+  };
   return (
     <div className="container">
       <div className="row mb-3">
         <h1 className="col-md-10">Your Wallet</h1>
         <div className="col-md-2">
-          <button
-            onClick={() => setIsEditing(!isEditing)}
-            className="btn btn-secondary"
-          >
+          <button onClick={onButtonClick} className="btn btn-secondary">
             {isEditing ? "Save" : "Edit"}
           </button>
         </div>

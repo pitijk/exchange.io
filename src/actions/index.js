@@ -8,6 +8,7 @@ export const fetchExchangeRates = currency => async dispatch => {
   );
   const { rates } = fullResponse.data;
   if (rates[today()] && rates[yesterday()]) {
+    dispatch(editCurrenciesValues(rates[today()], rates[yesterday()]));
     dispatch({
       type: types.FETCH_EXCHANGE_RATES,
       overload: {
@@ -17,6 +18,7 @@ export const fetchExchangeRates = currency => async dispatch => {
     });
   } else {
     const response = await axios.get(`${URL}/latest?base=${currency}`);
+    dispatch(editCurrenciesValues(response.data.rates, response.data.rates));
     dispatch({
       type: types.FETCH_EXCHANGE_RATES,
       overload: {
@@ -71,8 +73,8 @@ export const editCurrency = (
     overload: {
       shortcut,
       amount,
-      currentValue,
-      previousValue
+      currentValue: nextCurrentValue,
+      previousValue: nextPreviousValue
     }
   });
 };
@@ -103,5 +105,15 @@ export const changeDefaultCurrency = currency => {
   return {
     type: types.CHANGE_DEFAULT_CURRENCY,
     currency
+  };
+};
+
+export const editCurrenciesValues = (currentRates, previousRates) => {
+  return {
+    type: types.EDIT_CURRENCIES_VALUES,
+    overload: {
+      currentRates,
+      previousRates
+    }
   };
 };

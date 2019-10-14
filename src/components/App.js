@@ -5,9 +5,11 @@ import { connect } from "react-redux";
 import Wallet from "./Wallet.js";
 import AddCurrency from "./AddCurrency";
 import BalanceHeading from "./BalanceHeading";
+import ChangeDefault from "./ChangeDefault";
 
 const App = props => {
-  useEffect(() => props.fetchExchangeRates(props.defaultCurrency));
+  const { defaultCurrency } = props;
+  useEffect(() => props.fetchExchangeRates(defaultCurrency), []);
   return (
     <div className="container-fluid">
       <BalanceHeading />
@@ -17,6 +19,7 @@ const App = props => {
         </div>
         <div className="col-md-4">
           <AddCurrency />
+          <ChangeDefault defaultCurrency={defaultCurrency} />
         </div>
       </div>
     </div>

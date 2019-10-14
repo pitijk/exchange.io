@@ -6,7 +6,10 @@ const BalanceHeading = props => {
   const renderPercent = () => {
     const percent =
       (props.currentTotalValue / props.previousTotalValue - 1) * 100;
-    if (percent > 0) {
+    if (!props.currentTotalValue) {
+      return;
+    }
+    if (percent >= 0) {
       return <p className="text-success">{`(+${percent.toFixed(2)}%)`}</p>;
     } else {
       return <p className="text-danger">{`(${percent.toFixed(2)}%)`}</p>;
