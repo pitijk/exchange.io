@@ -11,19 +11,29 @@ const Currency = props => {
     currentValue,
     previousValue,
     isEditing,
-    firstTime
+    firstTime,
+    walletIsValid,
+    walletNotValid,
+    isWalletValid
   } = props;
   const [valueInput, setValueInput] = useState(amount);
+  const [isValid, setIsValid] = useState(true);
 
   const onValueInputChange = event => {
     const str = event.target.value;
-    // var result = regex.test(str);
-    // result ? backToNormal : warning
+    var result = regex.test(str);
     setValueInput(str);
+    if (result) {
+      setIsValid(true);
+      walletIsValid();
+    } else {
+      setIsValid(false);
+      walletNotValid();
+    }
   };
 
   const handleSubmit = () => {
-    if (regex.test(valueInput) && Number(valueInput) !== amount) {
+    if (isWalletValid && isValid && Number(valueInput) !== amount) {
       const { currentValue, previousValue } = calcValues(
         Number(valueInput),
         shortcut,
@@ -38,53 +48,73 @@ const Currency = props => {
     }
   };
 
+  const renderError = () => {
+    if (isValid) {
+      return;
+    } else {
+      return (
+        <p className="error negative">
+          Value must be in (12.34) format and can't be larger than 12 digits!
+        </p>
+      );
+    }
+  };
+
   const renderPercent = () => {
     const percent = (currentValue / previousValue - 1) * 100;
     if (percent >= 0) {
-      return <p className="text-success">{`(+${percent.toFixed(2)}%)`}</p>;
+      return (
+        <span className="percent positive">{`(+${percent.toFixed(2)}%)`}</span>
+      );
     } else {
-      return <p className="text-danger">{`(${percent.toFixed(2)}%)`}</p>;
+      return (
+        <span className="percent negative">{`(${percent.toFixed(2)}%)`}</span>
+      );
     }
   };
 
   if (isEditing) {
     return (
-      <div className="row">
-        <h4 className="col-md-3">{shortcut}</h4>
-        <div className="col-md-3">
-          <input
-            onChange={onValueInputChange}
-            value={valueInput}
-            type="text"
-            className="form-control"
-            id="value"
-            placeholder="value"
-          />
-        </div>
-        <h4 className="col-md-3">
-          {currentValue.toFixed(2) + signs[props.defaultCurrency]}
-        </h4>
-        <div className="col-md-3">
+      <>
+        <div className="currency-edit">
+          <div className="currency">
+            <div className="currency__item">{shortcut}</div>
+            <input
+              onChange={onValueInputChange}
+              value={valueInput}
+              type="text"
+              id="value"
+              placeholder="value"
+              className="input--amount"
+            />
+            <div className="currency__item">
+              {currentValue.toFixed(2) + signs[props.defaultCurrency]}
+              {renderPercent()}
+            </div>
+          </div>
           <button
             onClick={() => props.deleteCurrency(shortcut)}
-            className="btn btn-danger"
+            className="button--delete"
           >
-            Delete
+            <i className="fas fa-trash fa-2x"></i>
           </button>
         </div>
-      </div>
+        {renderError()}
+      </>
     );
   } else {
     if (!firstTime) {
       handleSubmit();
     }
     return (
-      <div className="row">
-        <h4 className="col-md-3">{shortcut}</h4>
-        <h4 className="col-md-3">{amount + signs[shortcut]}</h4>
-        <div className="col-md-3">
-          <h4>{currentValue.toFixed(2) + signs[props.defaultCurrency]}</h4>
-          {renderPercent()}
+      <div className="currency-edit">
+        <div className="currency">
+          <div className="currency__item">{shortcut}</div>
+          <div className="currency__item">{amount + signs[shortcut]}</div>
+          <div className="currency__item">
+            {currentValue.toFixed(2) + signs[props.defaultCurrency]}
+            {renderPercent()}
+          </div>
         </div>
       </div>
     );

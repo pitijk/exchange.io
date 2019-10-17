@@ -1,0 +1,225 @@
+@import "_variables";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: $font;
+}
+
+.main-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: $main-bg-color;
+}
+
+/////////// ##
+/// App
+///////// ##
+
+.divided-container {
+  margin: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  &__card {
+    background: white;
+    border-radius: 10px;
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  &__card-right {
+  }
+}
+
+/////////// ##
+/// Wallet
+///////// ##
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  &__title {
+    grid-column: 2 / 3;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .button--edit {
+  }
+}
+
+.currency-list {
+  overflow-y: scroll;
+  height: 16.5rem;
+}
+
+/////////// ##
+/// BalanceHeading
+///////// ##
+
+.jumbotron {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("../img/back.png");
+  background-size: cover;
+  background-position: center;
+  height: 30vh;
+
+  &__balance {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30vh;
+    font-size: 3rem;
+    color: white;
+  }
+}
+
+/////////// ##
+/// Currency
+///////// ##
+
+.currency {
+  width: 85%;
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-radius: 5px;
+  text-align: center;
+  // border: 1px solid black;
+  background-color: rgb(216, 213, 213);
+
+  &__item {
+    font-size: 1.3rem;
+  }
+
+  .input--amount {
+    border: none;
+    font-size: 1.3rem;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    border-radius: 5px;
+    background-color: rgb(230, 228, 228);
+  }
+}
+.button--delete {
+  background: $negative-color;
+  border-radius: 5px;
+  padding: 0.5rem;
+  // height: 100%;
+  margin-left: 1rem;
+  border: none;
+}
+
+.currency-edit {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+/////////// ##
+/// Right Forms
+///////// ##
+
+.forms {
+  display: flex;
+  height: 90%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.header--right {
+  font-size: 2rem;
+  margin-bottom: 1.2rem;
+  font-weight: 400;
+}
+
+.form-inline {
+  font-size: 1.3rem;
+  display: flex;
+  margin-bottom: 2rem;
+
+  .input--currency {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+    border-color: grey;
+    color: grey;
+  }
+
+  .input--amount {
+    font-size: inherit;
+    padding: 0.2rem;
+    border: 1px solid grey;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  .button--submit {
+    margin-left: 1rem;
+    font-size: inherit;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(27, 195, 27);
+    color: white;
+    padding: 0 0.5rem;
+  }
+}
+
+.change {
+  .input--currency {
+    border-radius: 5px;
+    border: 1px solid grey;
+  }
+}
+
+/////////// ##
+/// Side Styles
+///////// ##
+
+.percent {
+  font-size: 0.66em;
+}
+
+.positive {
+  color: $positive-color;
+}
+
+.negative {
+  color: $negative-color;
+}
+
+.button--edit {
+  background-color: inherit;
+  border: none;
+  font-size: 1.2rem;
+  color: rgb(43, 43, 230);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.break {
+  height: 2px;
+  background-color: black;
+  width: 80%;
+  margin: 1rem auto;
+  border-radius: 40%;
+}
+
+.input--currency {
+  appearance: none;
+  padding: 0.2rem;
+  font-size: inherit;
+
+  &:focus {
+    outline: none;
+  }
+}

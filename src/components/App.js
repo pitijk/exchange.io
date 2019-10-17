@@ -1,3 +1,5 @@
+import "../sass/index.scss";
+
 import React, { useEffect } from "react";
 import { fetchExchangeRates } from "../actions";
 import { connect } from "react-redux";
@@ -11,18 +13,21 @@ const App = props => {
   const { defaultCurrency } = props;
   useEffect(() => props.fetchExchangeRates(defaultCurrency), []);
   return (
-    <div className="container-fluid">
+    <main className="main-container">
       <BalanceHeading />
-      <div className="row">
-        <div className="col-md-8">
+      <div className="divided-container">
+        <div className="divided-container__card">
           <Wallet />
         </div>
-        <div className="col-md-4">
-          <AddCurrency />
-          <ChangeDefault defaultCurrency={defaultCurrency} />
+        <div className="divided-container__card">
+          <h2 className="header--right">Add Currency</h2>
+          <div className="forms">
+            <AddCurrency />
+            <ChangeDefault defaultCurrency={defaultCurrency} />
+          </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

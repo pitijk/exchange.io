@@ -10,20 +10,26 @@ const BalanceHeading = props => {
       return;
     }
     if (percent >= 0) {
-      return <p className="text-success">{`(+${percent.toFixed(2)}%)`}</p>;
+      return (
+        <span className="percent positive">{` ( +${percent.toFixed(
+          2
+        )}% )`}</span>
+      );
     } else {
-      return <p className="text-danger">{`(${percent.toFixed(2)}%)`}</p>;
+      return (
+        <span className="percent negative">{` (${percent.toFixed(2)}%)`}</span>
+      );
     }
   };
 
   return (
-    <div className="jumbotron jumbotron-fluid">
-      <div className="container">
-        <h1 className="display-4">{`Your balance: ${props.currentTotalValue.toFixed(
-          2
-        )}${signs[props.defaultCurrency]}`}</h1>
+    <div className="jumbotron">
+      <h1 className="jumbotron__balance">
+        {`Your balance: 
+        ${props.currentTotalValue.toFixed(2)}
+        ${signs[props.defaultCurrency]}`}
         {renderPercent()}
-      </div>
+      </h1>
     </div>
   );
 };

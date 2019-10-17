@@ -5,7 +5,7 @@ export default (state = [], action) => {
     case types.ADD_CURRENCY:
       const newState = [...state];
       const { shortcut, amount, currentValue, previousValue } = action.overload;
-      const currency = state.find(cur => cur.shortcut === shortcut);
+      const currency = newState.find(cur => cur.shortcut === shortcut);
       if (currency) {
         currency.amount += amount;
         currency.currentValue += currentValue;
@@ -13,29 +13,25 @@ export default (state = [], action) => {
       } else {
         newState.push(action.overload);
       }
+      newState.sort((a, b) => b.currentValue - a.currentValue);
       return newState;
     case types.DELETE_CURRENCY:
       return state.filter(cur => cur.shortcut !== action.shortcut);
     case types.EDIT_CURRENCY:
-      return state.map(cur =>
+      const newState1 = state.map(cur =>
         cur.shortcut === action.overload.shortcut ? action.overload : cur
       );
+      newState1.sort((a, b) => b.currentValue - a.currentValue);
+      return newState1;
     case types.EDIT_CURRENCIES_VALUES:
       const { currentRates, previousRates } = action.overload;
-      return state.map(cur => {
+      const newState2 = state.map(cur => {
         return {
           ...cur,
           currentValue: cur.amount / currentRates[cur.shortcut],
           previousValue: cur.amount / previousRates[cur.shortcut]
         };
       });
-    case types.ASCENDING_CURRENCY_ORDER:
-      const newState1 = [...state];
-      newState1.sort((a, b) => a.currentValue - b.currentValue);
-      return newState1;
-    case types.DESCENDING_CURRENCY_ORDER:
-      const newState2 = [...state];
-      newState2.sort((a, b) => b.currentValue - a.currentValue);
       return newState2;
     default:
       return state;

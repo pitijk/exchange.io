@@ -24,4 +24,4 @@ export const signs = {
 };
 
 export const URL = "https://api.exchangeratesapi.io";
-export const regex = /^[1-9][0-9]{0,11}\.?[0-9]{0,2}$/;
+export const regex = /^[1-9][0-9]{0,11}(\.[0-9]{1,2})?$/;

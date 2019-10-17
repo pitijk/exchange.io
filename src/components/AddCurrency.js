@@ -8,22 +8,26 @@ import SelectOptions from "./SelectOptions";
 const AddCurrency = props => {
   const [valueInput, setValueInput] = useState("");
   const [currencyInput, setCurrencyInput] = useState("USD");
+  const [isValid, setIsValid] = useState(true);
 
   const onTextInputChange = event => {
     const str = event.target.value;
-    // var result = regex.test(str);
-    // result ? backToNormal : warning
+    const result = regex.test(str);
     setValueInput(str);
+    result ? setIsValid(true) : setIsValid(false);
   };
 
   const onCurrencyInputChange = event => {
     const str = event.target.value;
     setCurrencyInput(str);
+    const result = regex.test(str);
+    result ? setIsValid(true) : setIsValid(false);
   };
 
   const handleSubmit = event => {
     event.preventDefault();
     if (regex.test(valueInput)) {
+      setIsValid(true);
       const amount = Number(valueInput);
       const { currentValue, previousValue } = calcValues(
         amount,
@@ -33,34 +37,48 @@ const AddCurrency = props => {
       // addCurrency = (shortcut, amount,currentValue, previousValue)
       props.addCurrency(currencyInput, amount, currentValue, previousValue);
       setValueInput("");
+    } else {
+      setIsValid(false);
     }
   };
+
+  const renderError = () => {
+    if (isValid) {
+      return;
+    } else {
+      return (
+        <p className="error negative">
+          Value must be in (12.34) format and can't be larger than 12 digits!
+        </p>
+      );
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="form-inline">
-      <label htmlFor="currency">Currency</label>
-      <select
-        value={currencyInput}
-        onChange={onCurrencyInputChange}
-        className="form-control"
-        id="currency"
-      >
-        <SelectOptions />
-      </select>
-      <label htmlFor="value" className="sr-only">
-        Value
-      </label>
-      <input
-        onChange={onTextInputChange}
-        value={valueInput}
-        type="text"
-        className="form-control"
-        id="value"
-        placeholder="value"
-      />
-      <button type="submit" className="btn btn-primary">
-        Add
-      </button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit} className="form-inline">
+        <select
+          value={currencyInput}
+          onChange={onCurrencyInputChange}
+          id="currency"
+          className="input--currency"
+        >
+          <SelectOptions />
+        </select>
+        <input
+          onChange={onTextInputChange}
+          value={valueInput}
+          type="text"
+          id="value"
+          placeholder="value"
+          className="input--amount"
+        />
+        <button type="submit" className="button--submit">
+          Add
+        </button>
+      </form>
+      {renderError()}
+    </div>
   );
 };
 
