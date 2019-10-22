@@ -48,7 +48,7 @@ const AddCurrency = props => {
     } else {
       return (
         <p className="error negative">
-          Value must be in (12.34) format and can't be larger than 12 digits!
+          Value must be in (12.34) format and can't be larger than 10 digits!
         </p>
       );
     }
@@ -73,7 +73,7 @@ const AddCurrency = props => {
           placeholder="value"
           className="input--amount"
         />
-        <button type="submit" className="button--submit">
+        <button type="submit" className="button--submit mob">
           Add
         </button>
       </form>

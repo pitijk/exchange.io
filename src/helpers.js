@@ -4,15 +4,17 @@ const dateToString = date => {
   const yyyy = date.getFullYear();
   return `${yyyy}-${mm}-${dd}`;
 };
+// today is today's day of the week, but 1 week earlier. Coz api isn't updating that fast.
 
 export const today = () => {
   const today = new Date();
+  today.setDate(today.getDate() - 7);
   return dateToString(today);
 };
 
 export const yesterday = () => {
   const today = new Date();
-  today.setDate(today.getDate() - 1);
+  today.setDate(today.getDate() - 8);
   return dateToString(today);
 };
 

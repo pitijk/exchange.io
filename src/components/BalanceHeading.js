@@ -25,9 +25,9 @@ const BalanceHeading = props => {
   return (
     <div className="jumbotron">
       <h1 className="jumbotron__balance">
-        {`Your balance: 
-        ${props.currentTotalValue.toFixed(2)}
-        ${signs[props.defaultCurrency]}`}
+        <div>Your balance: </div>
+        <div>{props.currentTotalValue.toFixed(2)}</div>
+        {signs[props.defaultCurrency]}
         {renderPercent()}
       </h1>
     </div>

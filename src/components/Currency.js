@@ -54,7 +54,7 @@ const Currency = props => {
     } else {
       return (
         <p className="error negative">
-          Value must be in (12.34) format and can't be larger than 12 digits!
+          Value must be in (12.34) format and can't be larger than 10 digits!
         </p>
       );
     }
@@ -78,7 +78,15 @@ const Currency = props => {
       <>
         <div className="currency-edit">
           <div className="currency">
-            <div className="currency__item">{shortcut}</div>
+            <div className="currency__item currency-header">
+              <strong>{shortcut}</strong>
+              <button
+                onClick={() => props.deleteCurrency(shortcut)}
+                className="button--delete"
+              >
+                <i class="fas fa-times fa-2x"></i>
+              </button>
+            </div>
             <input
               onChange={onValueInputChange}
               value={valueInput}
@@ -109,7 +117,9 @@ const Currency = props => {
     return (
       <div className="currency-edit">
         <div className="currency">
-          <div className="currency__item">{shortcut}</div>
+          <div className="currency__item">
+            <strong>{shortcut}</strong>
+          </div>
           <div className="currency__item">{amount + signs[shortcut]}</div>
           <div className="currency__item">
             {currentValue.toFixed(2) + signs[props.defaultCurrency]}

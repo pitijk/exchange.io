@@ -20,7 +20,7 @@ const ChangeDefault = props => {
 
   return (
     <div>
-      <h2 className="header--right">Change your currency to:</h2>
+      <h2 className="header--right small">Change your currency to:</h2>
       <div className="form-inline change">
         <select
           value={currency}

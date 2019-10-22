@@ -1,0 +1,89 @@
+@media only screen and (max-width: 1300px) {
+  .divided-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .currency-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .currency {
+    grid-template-columns: 1fr;
+    .input--amount {
+      margin-bottom: 0.5rem;
+    }
+  }
+  .currency__item {
+    margin-bottom: 0.5rem;
+  }
+  .button--delete {
+    margin-left: 0.5rem;
+  }
+  .button--delete {
+    display: none;
+  }
+  .currency-header {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+    strong {
+      grid-column: 2 / 3;
+      text-align: center;
+    }
+    .button--delete {
+      display: inline-block;
+      background: none;
+      padding: 0;
+      margin: 0;
+      color: rgb(221, 0, 0);
+    }
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .currency-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .header--right {
+    text-align: center;
+  }
+  .small {
+    font-size: 1.3rem;
+  }
+  .form-inline {
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .input--currency {
+      display: block;
+    }
+    .input--amount {
+      width: 60%;
+    }
+    .button--submit {
+      padding: 0.26rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 440px) {
+  .divided-container {
+    margin: 1rem;
+  }
+  .mob {
+    margin-top: 1.5rem;
+    padding: 0.26rem 1.5rem !important;
+  }
+  .currency {
+    width: 95%;
+    .input--amount {
+      padding: 0;
+    }
+  }
+
+  .jumbotron__balance {
+    font-size: 2rem;
+  }
+}
