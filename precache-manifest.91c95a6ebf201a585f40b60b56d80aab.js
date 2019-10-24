@@ -1,18 +1,18 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "750ee4d1ec2344b583fd95970cc01f9e",
+    "revision": "05260c6f65f08a5c900fcd3e5e62c7cb",
     "url": "/multi-currency-wallet/index.html"
   },
   {
-    "revision": "d96eafcf5070f944733a",
-    "url": "/multi-currency-wallet/static/css/main.f631b79f.chunk.css"
+    "revision": "7fcb4749e64a472fb30c",
+    "url": "/multi-currency-wallet/static/css/main.b7aeee42.chunk.css"
   },
   {
     "revision": "65d1bbcea7c802c154d4",
     "url": "/multi-currency-wallet/static/js/2.5a7adad4.chunk.js"
   },
   {
-    "revision": "d96eafcf5070f944733a",
+    "revision": "7fcb4749e64a472fb30c",
     "url": "/multi-currency-wallet/static/js/main.950a51f6.chunk.js"
   },
   {

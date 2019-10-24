@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/multi-currency-wallet/static/css/main.f631b79f.chunk.css",
+    "main.css": "/multi-currency-wallet/static/css/main.b7aeee42.chunk.css",
     "main.js": "/multi-currency-wallet/static/js/main.950a51f6.chunk.js",
     "main.js.map": "/multi-currency-wallet/static/js/main.950a51f6.chunk.js.map",
     "runtime-main.js": "/multi-currency-wallet/static/js/runtime-main.31c24174.js",
@@ -8,15 +8,15 @@
     "static/js/2.5a7adad4.chunk.js": "/multi-currency-wallet/static/js/2.5a7adad4.chunk.js",
     "static/js/2.5a7adad4.chunk.js.map": "/multi-currency-wallet/static/js/2.5a7adad4.chunk.js.map",
     "index.html": "/multi-currency-wallet/index.html",
-    "precache-manifest.4156c7dcfbe4ad10cda72e863fa0c354.js": "/multi-currency-wallet/precache-manifest.4156c7dcfbe4ad10cda72e863fa0c354.js",
+    "precache-manifest.91c95a6ebf201a585f40b60b56d80aab.js": "/multi-currency-wallet/precache-manifest.91c95a6ebf201a585f40b60b56d80aab.js",
     "service-worker.js": "/multi-currency-wallet/service-worker.js",
-    "static/css/main.f631b79f.chunk.css.map": "/multi-currency-wallet/static/css/main.f631b79f.chunk.css.map",
+    "static/css/main.b7aeee42.chunk.css.map": "/multi-currency-wallet/static/css/main.b7aeee42.chunk.css.map",
     "static/media/index.scss": "/multi-currency-wallet/static/media/back.74f71ff3.png"
   },
   "entrypoints": [
     "static/js/runtime-main.31c24174.js",
     "static/js/2.5a7adad4.chunk.js",
-    "static/css/main.f631b79f.chunk.css",
+    "static/css/main.b7aeee42.chunk.css",
     "static/js/main.950a51f6.chunk.js"
   ]
 }
