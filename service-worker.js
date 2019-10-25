@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/multi-currency-wallet/precache-manifest.4a4ac58dba7302b7edad3960e632123f.js"
+  "/multi-currency-wallet/precache-manifest.a0b7710c5c79d1f6b1f9d66bebe8fabf.js"
 );
 
 self.addEventListener('message', (event) => {
