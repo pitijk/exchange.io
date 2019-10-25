@@ -84,7 +84,7 @@ const Currency = props => {
                 onClick={() => props.deleteCurrency(shortcut)}
                 className="button--delete"
               >
-                <i class="fas fa-times fa-2x"></i>
+                <i className="fas fa-times fa-2x"></i>
               </button>
             </div>
             <input

@@ -26,11 +26,16 @@ body {
   grid-template-columns: 7fr 3fr;
 
   &__card {
+    max-height: 60vh;
     background: white;
     border-radius: 10px;
     margin: 1rem;
     padding: 1rem;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  }
+  .left {
+    max-height: 50vh;
+    overflow-y: scroll;
   }
 
   &__card-right {
@@ -55,8 +60,6 @@ body {
 }
 
 .currency-list {
-  overflow-y: scroll;
-  max-height: 40vh;
   // height: 16.5rem;
 }
 

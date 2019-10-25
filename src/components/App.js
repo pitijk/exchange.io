@@ -16,7 +16,7 @@ const App = props => {
     <main className="main-container">
       <BalanceHeading />
       <div className="divided-container">
-        <div className="divided-container__card">
+        <div className="divided-container__card left">
           <Wallet />
         </div>
         <div className="divided-container__card">
